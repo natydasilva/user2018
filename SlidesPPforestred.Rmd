@@ -224,22 +224,18 @@ grid.arrange(pl.rpart,pl.pp,ncol=2)
 <!-- $$ -->
 
 
-##<span style="color:#26734d">PPforest: Ilustración del algoritmo</span> 
+## <span style="color:#26734d">PPforest Illustration</span> 
 <img src="figure/diagram.png" width="700px"/>
 
 
-##<span style="color:#26734d">PPforest: Implementación </span>
-* Implementado en un paquete de R **PPforest**
+##<span style="color:#26734d">Implementation</span> 
 
-* Versión inicial de **PPforest** enteramente en R.
+* Initial version was develop entirely in R, not fast enought
+* Two code optimization strategies were employed:
+     * translate the main functions to Rcpp
+     * parallelization 
 
-* Dos estrategias para optimizar el código fueron empleadas:
-
-     - Funciones principales en Rcpp (integración de R con C++)
-     
-     - Paralelización
-
-##<span style="color:#26734d">PPforest: Tiempo de procesamiento</span>
+##<span style="color:#26734d">PPforest runing time</span> 
 <!-- <img src="figure/resus-1.pdf" vspace="1"  "width="700px"/> -->
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
@@ -274,25 +270,21 @@ ggplot(data = mm.allbig) +
 
 ```
 
-##<span style="color:#26734d">PPforest: Diagnósticos</span> 
+##<span style="color:#26734d">PPforest Diagnostics</span> 
 
+<!-- Para entender mejor los modelos agregados y poder evaluarlos, algunos diagnósticos pueden ser definidos: -->
 
-Para entender mejor los modelos agregados y poder evaluarlos, algunos diagnósticos pueden ser definidos:
-
-- Matriz de proximidades 
-
-<!-- :calculated for every pair of observations, if cases $k_i$ and $k_j$ are in the same terminal node increase their proximity by one. Normalize  by the number of trees.  -->
-
-
-- Matriz de votos
-<!-- : one row for each input data point and one column for each class, giving the number of (OOB) votes for each class.   -->
-
-- Importancia de las variables
-
-- Tasa de error OOB
+* OOB Error rate
 <!-- : OOB error, proportion of times that case $n$ is wrong classified  averaged over all cases is the oob error estimate.  -->
 
-Segunda motivación, construir herramientas para explorar, entender y diagnosticar "black box models"
+* Variable importance
+* Proximity matrix
+<!-- :calculated for every pair of observations, if cases $k_i$ and $k_j$ are in the same terminal node increase their proximity by one. Normalize  by the number of trees.  -->
+
+* Vote matrix
+<!-- : one row for each input data point and one column for each class, giving the number of (OOB) votes for each class.   -->
+
+<!-- Segunda motivación, construir herramientas para explorar, entender y diagnosticar "black box models" -->
 
 ## <span style="color:#26734d">Visualización de modelos agregados de clasificación </span> 
 
