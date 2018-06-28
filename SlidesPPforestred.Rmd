@@ -224,18 +224,18 @@ grid.arrange(pl.rpart,pl.pp,ncol=2)
 <!-- $$ -->
 
 
-## <span style="color:#26734d">PPforest Illustration</span> 
+## <span style="color:#26734d"> PPforest Illustration </span> 
 <img src="figure/diagram.png" width="700px"/>
 
 
-##<span style="color:#26734d">Implementation</span> 
+## <span style="color:#26734d"> Implementation </span> 
 
 * Initial version was develop entirely in R, not fast enought
 * Two code optimization strategies were employed:
      * translate the main functions to Rcpp
      * parallelization 
 
-##<span style="color:#26734d">PPforest runing time</span> 
+## <span style="color:#26734d"> PPforest runing time </span> 
 <!-- <img src="figure/resus-1.pdf" vspace="1"  "width="700px"/> -->
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
@@ -270,7 +270,7 @@ ggplot(data = mm.allbig) +
 
 ```
 
-##<span style="color:#26734d">PPforest Diagnostics</span> 
+## <span style="color:#26734d"> PPforest Diagnostics </span> 
 
 <!-- Para entender mejor los modelos agregados y poder evaluarlos, algunos diagnósticos pueden ser definidos: -->
 
@@ -278,7 +278,9 @@ ggplot(data = mm.allbig) +
 <!-- : OOB error, proportion of times that case $n$ is wrong classified  averaged over all cases is the oob error estimate.  -->
 
 * Variable importance
+
 * Proximity matrix
+
 <!-- :calculated for every pair of observations, if cases $k_i$ and $k_j$ are in the same terminal node increase their proximity by one. Normalize  by the number of trees.  -->
 
 * Vote matrix
@@ -286,29 +288,61 @@ ggplot(data = mm.allbig) +
 
 <!-- Segunda motivación, construir herramientas para explorar, entender y diagnosticar "black box models" -->
 
-## <span style="color:#26734d">Visualización de modelos agregados de clasificación </span> 
+## <span style="color:#26734d">Visually diagnosing forest classifiers </span> 
+Structuring data and constructing plots to explore forest classification models interactively.
 
-Para explorar y diagnosticar modelos de bosques de clasificación se diseña una aplicación interactiva con tres niveles de análisis.
+ We proposed a method to explore and diagnostic ensemble classifiers based on three levels of analysis:
  
- 1. **Casos individuales (observaciones)**
- 2. **Modelos individuales (árboles)**
- 3. **Comparación de la performance (PPF vs RF)**
+ 1. **Individual cases (Observations)** 
+ 2. **Individual models (Trees)** 
+ 3. **Performance comparison (PPF vs RF)**
  
-Marco conceptual propuesto por [@wickham2015visualizing] para visualizar modelos estadísticos.
+Key part of the visualization is the use of interactive visualization methods. 
 
-Clave en nuestra aplicación es el uso de métodos de visualización interactiva. 
+Interactive web-based visualization of the ensemble methods.
 
 
-## <span style="color:#26734d">Gráficos interactivos </span>
+<!-- Para explorar y diagnosticar modelos de bosques de clasificación se diseña una aplicación interactiva con tres niveles de análisis. -->
+
+<!--  1. **Casos individuales (observaciones)** -->
+<!--  2. **Modelos individuales (árboles)** -->
+<!--  3. **Comparación de la performance (PPF vs RF)** -->
+
+<!-- Marco conceptual propuesto por [@wickham2015visualizing] para visualizar modelos estadísticos. -->
+
+<!-- Clave en nuestra aplicación es el uso de métodos de visualización interactiva.  -->
+
+## <span style="color:#26734d">Interactive graphics</span>
+ Two key components that an  interactive graphic should accomplish: 
  
- Dos tareas claves que una visualización interactiva debería cumplir:
+* Interactions in each visualization
+* Links between different graphics
+
+Why we should use interactive visualizations?
+
+To see connections inside each level that cannot be seen in a static graphs.
+ <!--  -->
  
- * Interacciones en cada visualización individual
- * Links entre distintos gráficos
- 
- ¿Por qué usar visualización interactiva?
- 
- Permite identificar conexiones al interior de cada nivel que no pueden ser vistos en gráficos estáticos.
+## <span style="color:#26734d">Interactive graphics</span>
+
+
+- Links at case level allows to identify cases where the model is not working properly and allows to characterize this case base on the original data. 
+
+- Also we can identify individual models in the ensemble that are not good enough and why this is happening. 
+
+- The last level of analysis focused on model comparison based on predicted performance by class. 
+
+
+<!-- ## <span style="color:#26734d"> Gráficos interactivos </span> -->
+
+<!--  Dos tareas claves que una visualización interactiva debería cumplir: -->
+
+<!--  * Interacciones en cada visualización individual -->
+<!--  * Links entre distintos gráficos -->
+
+<!--  ¿Por qué usar visualización interactiva? -->
+
+<!--  Permite identificar conexiones al interior de cada nivel que no pueden ser vistos en gráficos estáticos. -->
 
 <!-- - Los links a nivel de las observaciones permiten identificar casos donde el modelo no está funcionando bien y nos permite caracterizar la observación basado en los datos originales. -->
 
@@ -327,24 +361,36 @@ Clave en nuestra aplicación es el uso de métodos de visualización interactiva
 <!-- - Explorar el proceso completo -->
 
 
-##<span style="color:#26734d">Ejemplo: Fishcatch </span>
-159 observaciones de peces de 7 especies (Bream, Parkki, Perch, Pike, Roach, Smelt y Whitewish) son capturados y medidos, 6 variables.
+<!-- ## <span style="color:#26734d">Ejemplo: Fishcatch </span> -->
+<!-- 159 observaciones de peces de 7 especies (Bream, Parkki, Perch, Pike, Roach, Smelt y Whitewish) son capturados y medidos, 6 variables. -->
 
-Variable|Descripción
+<!-- Variable|Descripción -->
+<!-- ------------|------------------------------------------------------ -->
+<!-- weight| Peso del pez (en gramos) -->
+<!-- length1| Longitud desde la nariz al inicio de la cola (en cm) -->
+<!-- length2| Longitud desde la nariz hasta la muesca de la cola (en cm) -->
+<!-- length3| Longitud desde la nariz hasta el final de la cola (en cm) -->
+<!-- height|  Altura máxima como  % de length3 -->
+<!-- width|   Ancho máximo como % de length3 -->
+
+## <span style="color:#26734d"> Fishcatch data example </span>
+159 fishes of 7 species (Bream, Parkki, Perch, Pike, Roach, Smelt and Whitewish) are caught and measured, 6 variables. 
+
+Varible|Description
 ------------|------------------------------------------------------
-weight| Peso del pez (en gramos)
-length1| Longitud desde la nariz al inicio de la cola (en cm)
-length2| Longitud desde la nariz hasta la muesca de la cola (en cm)
-length3| Longitud desde la nariz hasta el final de la cola (en cm)
-height|  Altura máxima como  % de length3
-width|   Ancho máximo como % de length3
+weight| Weight of the fish (in grams)
+length1| Length from the nose to the beginning of the tail (in cm)
+length2| Length from the nose to the notch of the tail (in cm)
+length3| Length from the nose to the end of the tail (in cm)
+height| Maximal height as % of Length3
+width| Maximal width as % of Length3
 
 
-## <span style="color:#26734d">Panel 1: Diagrama del nivel observacional</span>
+## <span style="color:#26734d">Panel 1: Individual cases</span>
 
 <img src="figure/fishT1.png" height="450px" width="700px"/>
 
-##<span style="color:#26734d">Ejemplo: Fishcatch </span>
+##<span style="color:#26734d">Example: Fishcatch </span>
 
   
 ```{r hola, echo = FALSE, fig.height = 5, fig.width = 8, warning = FALSE, message=FALSE,fig.align="center",  warning = FALSE, message=FALSE}
@@ -376,9 +422,6 @@ p <- ggplot(scale.dat.melt, aes(x = Variables, y = Value,
  plotly::ggplotly(p,tooltip = c("var","colour","y","key"))   
 
 ```
-
-
-
 
 ## <span style="color:#26734d">Proximity Matrix</span>
 
@@ -443,7 +486,7 @@ ggplotly(p2,tooltip = c("colour","x","y","key"))
 </center>
 
 
-## <span style="color:#26734d"> Matríz de votos, Jittered side-by-side dot plot</span>
+## <span style="color:#26734d"> Vote matrix, Jittered side-by-side dot plot</span>
 <center>
 ```{r, echo=FALSE,fig.height=5,fig.width=7,fig.align="center", warning=FALSE,message=FALSE}
 library(stringr)
@@ -463,14 +506,14 @@ library(stringr)
 </center>
 
 
-## <span style="color:#26734d">Matríz de votos, ternary plot</span>
+## <span style="color:#26734d"> Vote matrix, ternary plot</span>
 * Diagrama triangular muestra la proporción de tres variables que suman una constante y lo hace usando coordinadas baricéntricas.
 Podemos dibujar la proporción de tres variables en dos dimensiones. Es útil para visualizar datos composicionales.
 
 * Con más de tres clases el diagrama triangular necesita ser generalizado.
 Los datos son proyectados en un espacio $(p-1)-$D. Este método será utilizado para visualizar la matriz de votos.
 
-## <span style="color:#26734d">Matríz de votos, ternary plot</span>
+## <span style="color:#26734d"> Vote matrix, ternary plot</span>
 <center>
 ```{r, echo=FALSE,fig.height=3,fig.width=7,fig.align="center",cache=TRUE, warning = FALSE, message=FALSE}
 
@@ -593,25 +636,25 @@ t3 <- ternaryshell(ppf, 6, 2, 3)
 
 
 
-## <span style="color:#26734d">Panel 1: App para el nivel observacional</span>
+## <span style="color:#26734d">Panel 1: App for individual cases  </span>
 
 <iframe class="vimeo-embed" src="https://player.vimeo.com/video/222028803" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen> </iframe>
 
 
-## <span style="color:#26734d">Panel 2: Modelos</span>
+## <span style="color:#26734d">Panel 2: Individual models</span>
 
 <img src="figure/fishT2.png" height="450px" width="700px"/>
 
-## <span style="color:#26734d">Panel 2: App modelos </span>
+## <span style="color:#26734d">Panel 2: App for individual models </span>
 
 <iframe class="vimeo-embed" src="https://player.vimeo.com/video/222029591" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen> </iframe>
 
 
-## <span style="color:#26734d">Panel 3: Comparación </span>
+## <span style="color:#26734d">Panel 3: Performance comparison (PPF vs RF) </span>
 
 <img src="figure/fishT3.png" height="450px" width="700px" />
 
-## <span style="color:#26734d">Panel 3: App comparación </span>
+## <span style="color:#26734d">Panel 3: App for performance comparison (PPF vs RF) </span>
 
 <iframe class="vimeo-embed" src="https://player.vimeo.com/video/222029620" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen> </iframe>
 
@@ -705,22 +748,22 @@ t3 <- ternaryshell(ppf, 6, 2, 3)
 
 
 
-## <span style="color:#26734d">Comentarios Finales </span>
-1. PPF método de clasificación agregado basado en árboles con particiones oblicuas.
+<!-- ## <span style="color:#26734d">Final comments </span> -->
+<!-- 1. PPF método de clasificación agregado basado en árboles con particiones oblicuas. -->
 
-2. PPF toma la correlación entre variables en cuenta y mejora la performance de RF cuando la separación ocurre en combinaciones de variables.
+<!-- 2. PPF toma la correlación entre variables en cuenta y mejora la performance de RF cuando la separación ocurre en combinaciones de variables. -->
 
-3. En estudios de simulación PPF tiene mejor performance que RF cuando las clases pueden ser separadas por combinaciones lineales y la correlación entre variables se incrementa.
+<!-- 3. En estudios de simulación PPF tiene mejor performance que RF cuando las clases pueden ser separadas por combinaciones lineales y la correlación entre variables se incrementa. -->
 
-## <span style="color:#26734d">Comentarios Finales</span>
+## <span style="color:#26734d">Final comments</span>
 
-1. El tener mejores herramientas que ayuden a entender ``black box models'' nos da un mejore entendimiento de los datos, las fortalezas y debilidades y como el modelo va a funcionar en datos futuros. 
+1. Having better tools to open up black box models will provide for better understanding the data, the model strengths and weaknesses, and how the model will performs on future data.
 
-2. La visualización presentada provee una selección de gráficos interactivos para el diagnóstico de los modelos PPF . 
+2. This visualisation app provides a selection of interactive plots to diagnose PPF models. 
 
-3. Esta estructura puede ser utilizada para hacer una apps para otros clasificadores de agregación. 
+3. This shell could be used to make an app for other ensemble classifiers. 
 
-4. Combinar shiny, ggplot2 y plotly permite desarrollar visualizaciones interactivas potentes
+4. Combining `shiny`, `ggplot2` and `plotly` we can develop informative interactive visualizations
 
 <!-- 4. The app is implemented with new technology for interactive graphics provided by the `plotly` package. It is one of the first uses of these new tools. -->
 
@@ -738,12 +781,12 @@ t3 <- ternaryshell(ppf, 6, 2, 3)
 <!--     <!-- * Classes as a whole could be aggregated or re-organised as suggested by the model diagnostics -->
 
 
-## <span style="color:#26734d">Información </span>
+## <span style="color:#26734d"> Information </span>
 
-1.  Paquete PPforest:https://github.com/natydasilva/PPforest
-2.  Slides: https://github.com/natydasilva/SlidesPPforest
+1. PPforest package:https://cran.r-project.org/web/packages/PPforest/index.html
+2.  Slides:https://github.com/natydasilva/user2018
 3.  Viz: https://natydasilva.shinyapps.io/shinyppforest/
-4.  webpage: http://ndasilva.public.iastate.edu
+4.  webpage: http://natydasilva.com
 5.  email: natalia\@iesta.edu.uy  twitter:\@pacocuak
 
 
