@@ -71,8 +71,6 @@ PPtree treats the data always as a two-class system.
 
 When the classes are more than two the algorithm uses a two step  projection pursuits optimization in every node split.
 
-
-
 ## <span style="color:#26734d"> PPtree: Illustration of PPtree algorithm</span>
 <img src="figure/diag2.png" width="700px"/>
 
