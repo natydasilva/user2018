@@ -47,20 +47,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 - Some well known examples of ensemble learning methods are, boosting [@schapire1990strength], bagging [@breiman1996bagging] and random forest [@breiman2001random] among others.
 
--Main differences between ensembles, type of individual models to be combined and  the ways these individual models are combined. 
-
-<!-- - Aprendizaje supervisado: cuando el objetivo es predecir una variable categórica, problema de clasificación ( dos clases o múltiples clases) -->
-
-<!-- - **PPforest** es un nuevo método supervisado de agregación basado en árboles de proyección baggeados para clasificación. -->
-
-<!-- - Este método mejora la capacidad predictiva cuando la separación entre las clases se da en combinaciones lineales de variables. -->
-
-<!-- ## <span style="color:#26734d"> Modelos de agregación</span>  -->
-<!-- - Métodos de agregación: combina múltiples modelos individuales entrenados independientemente para construir un modelo de predicción. -->
-
-<!-- - Algunos ejemplos bien conocidos son;  boosting [@schapire1990strength], bagging [@breiman1996bagging] y random forest [@breiman2001random] entre otros. -->
-
-<!-- - La diferencia principal entre los métodos de agregación son;  el tipo de modelos individuales a ser combinados y la forma en que estos modelos son combinados. -->
+- Main differences between ensembles, type of individual models to be combined and  the ways these individual models are combined. 
 
 ## <span style="color:#26734d">PPforest</span>  
 **PPforest** is an ensemble learning method, built on bagged trees.  
@@ -79,31 +66,10 @@ The splits in **PPforest** are based on a linear combination of randomly chosen 
 Utilizing linear combinations of variables the individual model (**PPtree**) separates classes taking into account the correlation between variables.
 
 ## <span style="color:#26734d"> PPtree, individual classifier for PPforest  </span> 
-<!-- Combines tree structure methods with projection pursuit dimension reduction. -->
-Treats the data always as a two-class system.
+PPtree Combines tree structure methods with projection pursuit dimension reduction. 
+PPtree treats the data always as a two-class system.
 
 When the classes are more than two the algorithm uses a two step  projection pursuits optimization in every node split.
-
-
-<!-- ## <span style="color:#26734d">PP: projection pursuit</span> -->
-<!-- - PP es la forma de encontrar proyecciones interesantes en bajas dimensiones usando un índice de proyección y procedimientos de optimización. -->
-
-<!-- - Para encontrar proyecciones interesantes el índice PP seleccionado es maximizado. -->
-
-<!-- - Proyecciones interesantes para problemas de clasificación son aquellas que permiten ver las clases más separadas. -->
-
-<!-- ## <span style="color:#26734d">PPforest, clasificador individual </span>   -->
-<!-- El clasificador individual en  **PPforest** is un **PPtree** [@lee2005projection]. -->
-
-<!-- Trata los datos siempre como un sistema de dos clases. -->
-
-<!-- Cuando las clases son más que dos, el algoritmo usa dos pasos de optimización del índice de proyección  en cada partición del nodo. -->
-
-<!-- The splits in **PPforest** are based on a linear combination of randomly chosen variables. -->
-<!-- Utilizing linear combinations of variables the individual model (**PPtree**) separates classes taking into account the correlation between variables. -->
-
-<!-- ## <span style="color:#26734d"> PPtree, individual classifier for PPforest  </span>  -->
-<!-- Combines tree structure methods with projection pursuit dimension reduction. -->
 
 
 
@@ -173,56 +139,6 @@ grid.arrange(pl.rpart,pl.pp,ncol=2)
 </center>
 
 
-<!-- ## <span style="color:#26734d">PPforest</span> -->
-<!-- PPforest es un método de aprendizaje de agregación construido con PPtrees. -->
-
-<!-- - Definición formal -->
-
-<!-- - Implementación -->
-
-<!-- - Diagnósticos y Visualización  -->
-
-<!-- Projection pursuit classification random forest [@dasilvappforest] is an ensemble learning method, built on bagged trees. -->
-
-<!-- Main concepts: -->
-
-<!-- * Bootstrap aggregation (@breiman1996bagging and @breiman1996heuristics)-->
-
-<!-- * Random feature selection (@amit1997shape and @ho1998random) to individual classification trees for prediction. -->
-
-<!-- The splits in PPforest are based on a linear combination of randomly chosen variables. -->
-<!-- Utilizing linear combinations of variables the individual model (PPtree) separates classes taking into account the correlation between variables. -->
-
-<!-- ##<span style="color:#26734d">PPforest definición formal</span> -->
-
-<!-- * $\mathbf{X}\in R^p$: vector aleatorio de variables predictoras -->
-<!-- * $Y \in \mathscr{G}$ variable aleatoria a predecir (output)  -->
-<!-- * $\mathscr{G}$ es un conjunto finito tal que $\mathscr{G}=\{1,2, \ldots, G\}$.  -->
-<!-- * La muestra de entrenamiento es definida como $D_n=\{(X_1,Y_1), ..., (X_n, Y_n)\}$ de i.i.d $\Re^p \times \mathscr{G}$ variables aleatorias $(p\geq 2)$.-->
-
-<!-- El objetivo es construir un clasificador que prediga $y$ con $\mathbf{x}$ usando $D_n$ dado un clasificador agregado  $\{h_n\}$. -->
-
-<!-- ##<span style="color:#26734d">PPforest definición formal</span> -->
-
-<!--  Clasificador PPforest: -->
-
-<!-- * Una colección de árboles de clasificación aleatorios $\{h_n(\mathbf{x}, \Theta_m, D_n), m\geq 1\}$  donde $\{\Theta_m\}$ son i.i.d. vectores aleatorios.-->
-
-<!-- * $\Theta_m$, contiene las dos fuentes de aleatoriedad en el árbol (la selección aleatoria de variables y la muestra aleatoria bootstrap),  -->
-<!-- <!-- then $\Theta_m$ has information about which variables were selected in each partition and which cases were selected in the bootstrap sample. --> 
-
-<!-- Para cada árbol, $h_n$, un voto único es considerado basado en la clase más popular y el predictor final se basa en la clase más votada en el bosque. -->
-
-
-<!-- ##<span style="color:#26734d">PPforest formal definition</span> -->
-<!-- PPF estimator based on combining the trees: -->
-<!-- $$ -->
-<!-- \begin{aligned} -->
-<!-- f_n(\mathbf{X}, D_n )&=& \operatorname*{arg\,max}_{g\in \mathscr{G}} \{E_{\Theta}(I[h_n(\mathbf{X}, \Theta, D_n)=g])\}\\ \nonumber -->
-<!-- &=& \operatorname*{arg\,max}_{g\in \mathscr{G}} P_{\Theta}(h_n(\mathbf{X}, \Theta, D_n)=g) -->
-<!-- \end{aligned} -->
-<!-- $$ -->
-
 
 ## <span style="color:#26734d"> PPforest Illustration </span> 
 <img src="figure/diagram.png" width="700px"/>
@@ -272,8 +188,6 @@ ggplot(data = mm.allbig) +
 
 ## <span style="color:#26734d"> PPforest Diagnostics </span> 
 
-<!-- Para entender mejor los modelos agregados y poder evaluarlos, algunos diagnósticos pueden ser definidos: -->
-
 * OOB Error rate
 <!-- : OOB error, proportion of times that case $n$ is wrong classified  averaged over all cases is the oob error estimate.  -->
 
@@ -302,18 +216,8 @@ Key part of the visualization is the use of interactive visualization methods.
 Interactive web-based visualization of the ensemble methods.
 
 
-<!-- Para explorar y diagnosticar modelos de bosques de clasificación se diseña una aplicación interactiva con tres niveles de análisis. -->
-
-<!--  1. **Casos individuales (observaciones)** -->
-<!--  2. **Modelos individuales (árboles)** -->
-<!--  3. **Comparación de la performance (PPF vs RF)** -->
-
-<!-- Marco conceptual propuesto por [@wickham2015visualizing] para visualizar modelos estadísticos. -->
-
-<!-- Clave en nuestra aplicación es el uso de métodos de visualización interactiva.  -->
-
 ## <span style="color:#26734d">Interactive graphics</span>
- Two key components that an  interactive graphic should accomplish: 
+ Two key components that an interactive graphic should accomplish: 
  
 * Interactions in each visualization
 * Links between different graphics
@@ -333,47 +237,8 @@ To see connections inside each level that cannot be seen in a static graphs.
 - The last level of analysis focused on model comparison based on predicted performance by class. 
 
 
-<!-- ## <span style="color:#26734d"> Gráficos interactivos </span> -->
-
-<!--  Dos tareas claves que una visualización interactiva debería cumplir: -->
-
-<!--  * Interacciones en cada visualización individual -->
-<!--  * Links entre distintos gráficos -->
-
-<!--  ¿Por qué usar visualización interactiva? -->
-
-<!--  Permite identificar conexiones al interior de cada nivel que no pueden ser vistos en gráficos estáticos. -->
-
-<!-- - Los links a nivel de las observaciones permiten identificar casos donde el modelo no está funcionando bien y nos permite caracterizar la observación basado en los datos originales. -->
-
-<!-- - También podemos identificar modelos individuales en el modelo agregado que no es suficientemente bueno e identificar porque esto está pasando.  -->
-
-<!-- - El último nivel de análisis se enfoca en la comparación de modelos basado en la capacidad predictiva para cada clase. -->
-
-
-<!-- ## <span style="color:#26734d">Marco conceptual </span> -->
-<!-- Tres estrategias [@wickham2015visualizing]: -->
-
-<!-- - Visualizar el modelo en el espacio de los datos -->
-
-<!-- - Observar todos los miembros de una colección -->
-
-<!-- - Explorar el proceso completo -->
-
-
-<!-- ## <span style="color:#26734d">Ejemplo: Fishcatch </span> -->
-<!-- 159 observaciones de peces de 7 especies (Bream, Parkki, Perch, Pike, Roach, Smelt y Whitewish) son capturados y medidos, 6 variables. -->
-
-<!-- Variable|Descripción -->
-<!-- ------------|------------------------------------------------------ -->
-<!-- weight| Peso del pez (en gramos) -->
-<!-- length1| Longitud desde la nariz al inicio de la cola (en cm) -->
-<!-- length2| Longitud desde la nariz hasta la muesca de la cola (en cm) -->
-<!-- length3| Longitud desde la nariz hasta el final de la cola (en cm) -->
-<!-- height|  Altura máxima como  % de length3 -->
-<!-- width|   Ancho máximo como % de length3 -->
-
 ## <span style="color:#26734d"> Fishcatch data example </span>
+
 159 fishes of 7 species (Bream, Parkki, Perch, Pike, Roach, Smelt and Whitewish) are caught and measured, 6 variables. 
 
 Varible|Description
@@ -387,12 +252,10 @@ width| Maximal width as % of Length3
 
 
 ## <span style="color:#26734d">Panel 1: Individual cases</span>
-
 <img src="figure/fishT1.png" height="450px" width="700px"/>
 
-##<span style="color:#26734d">Example: Fishcatch </span>
+## <span style="color:#26734d">Example: Fishcatch </span>
 
-  
 ```{r hola, echo = FALSE, fig.height = 5, fig.width = 8, warning = FALSE, message=FALSE,fig.align="center",  warning = FALSE, message=FALSE}
 library(devtools)
 #install_github("natydasilva/PPforest")
@@ -506,12 +369,13 @@ library(stringr)
 </center>
 
 
-## <span style="color:#26734d"> Vote matrix, ternary plot</span>
-* Diagrama triangular muestra la proporción de tres variables que suman una constante y lo hace usando coordinadas baricéntricas.
-Podemos dibujar la proporción de tres variables en dos dimensiones. Es útil para visualizar datos composicionales.
+<!-- ## <span style="color:#26734d"> Vote matrix, ternary plot</span> -->
 
-* Con más de tres clases el diagrama triangular necesita ser generalizado.
-Los datos son proyectados en un espacio $(p-1)-$D. Este método será utilizado para visualizar la matriz de votos.
+<!-- * Diagrama triangular muestra la proporción de tres variables que suman una constante y lo hace usando coordinadas baricéntricas. -->
+<!-- Podemos dibujar la proporción de tres variables en dos dimensiones. Es útil para visualizar datos composicionales. -->
+
+<!-- * Con más de tres clases el diagrama triangular necesita ser generalizado. -->
+<!-- Los datos son proyectados en un espacio $(p-1)-$D. Este método será utilizado para visualizar la matriz de votos. -->
 
 ## <span style="color:#26734d"> Vote matrix, ternary plot</span>
 <center>
