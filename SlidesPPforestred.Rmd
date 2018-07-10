@@ -1,8 +1,7 @@
 ---
-title: <span style="color:#000000">Interactive Graphics for Visually Diagnosing Forest Classifiers in R  </span>
-author: <span style="color:#000000"> <font size="6">Natalia da Silva, UDELAR-IESTA</span></font>
-
-date: <span style="color:#000000"> 13 July, 2018
+title: <span style="color:#26734d">Interactive Graphics for Visually Diagnosing Forest Classifiers in R  </span>
+author: <span style="color:#000000"> <font size="6">Natalia da Silva, Universidad de la República</span></font>
+date: <span style="color:#000000"> 12 July, 2018
 output: ioslides_presentation
 bibliography: bibliophd.bib
 ---
@@ -11,7 +10,7 @@ bibliography: bibliophd.bib
 
  <style>
  .title-slide {
-     background-image: url(figure/paint1.png);
+     <!-- background-image: url(figure/paint1.png); -->
      background-repeat: no-repeat;
      padding:40px;
      background-size: 1000px 800px;
@@ -24,8 +23,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## <span style="color:#26734d">Estructura de la presentación</span> 
 - Motivation
-
-- Ensemble models
 
 - PPforest, Projection pursuit random forest
 
@@ -66,10 +63,10 @@ The splits in **PPforest** are based on a linear combination of randomly chosen 
 Utilizing linear combinations of variables the individual model (**PPtree**) separates classes taking into account the correlation between variables.
 
 ## <span style="color:#26734d"> PPtree, individual classifier for PPforest  </span> 
-PPtree Combines tree structure methods with projection pursuit dimension reduction. 
+PPtree combines tree structure methods with projection pursuit dimension reduction. 
 PPtree treats the data always as a two-class system.
 
-When the classes are more than two the algorithm uses a two step  projection pursuits optimization in every node split.
+When the classes are more than two the algorithm uses a two step projection pursuits optimization in every node split.
 
 ## <span style="color:#26734d"> PPtree: Illustration of PPtree algorithm</span>
 <img src="figure/diag2.png" width="700px"/>
@@ -136,53 +133,52 @@ grid.arrange(pl.rpart,pl.pp,ncol=2)
 ```
 </center>
 
-
-
 ## <span style="color:#26734d"> PPforest Illustration </span> 
 <img src="figure/diagram.png" width="700px"/>
 
 
 ## <span style="color:#26734d"> Implementation </span> 
 
+* `PPforest` is on CRAN
 * Initial version was develop entirely in R, not fast enought
 * Two code optimization strategies were employed:
      * translate the main functions to Rcpp
-     * parallelization 
+     * parallelization
 
-## <span style="color:#26734d"> PPforest runing time </span> 
-<!-- <img src="figure/resus-1.pdf" vspace="1"  "width="700px"/> -->
+<!-- ## <span style="color:#26734d"> PPforest runing time </span>  -->
+<!-- <!-- <img src="figure/resus-1.pdf" vspace="1"  "width="700px"/> --> -->
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-load("preformance_timesWTplyr.Rdata")
-global_labeller <- labeller(
- g = class,
- ntrees = trees,
- .default = label_both
-)
-mm.allbig <- bind_rows(mm.new, mm.old) %>%
-  rename(p=ps, g=gs, n=ns, ntrees=mtrees) %>%
-  mutate(version = recode(version, new="post", old="pre")) %>%
-  mutate(seconds = time/1e9)
-mm.allbig$version <- factor(mm.allbig$version, levels = c("pre","post"))
-levels(mm.allbig$version) <- c("Only in R", "Rcpp & parallelization")
-ggplot(data = mm.allbig) +
-    geom_smooth(aes(g, seconds, color = version,
-                        linetype = version), method="lm") +
-    geom_jitter(aes(g, seconds, color = version, shape = version),
-               alpha = .4, size = 3, height = 0) +
-    scale_x_continuous(breaks=seq(0,10,2)) +
-    labs(x = "Num. groups", y = "Time (sec)") +
-    scale_colour_brewer(name = "", type = "qual",
-                      palette = "Dark2") +
-    scale_shape(name = "") +
-    scale_linetype(name = "") +
-    facet_grid(ntrees~n + p, labeller = label_both,
-                scales = "free_y") +
-    #scale_x_continuous(trans = 'log2') +
-    theme(legend.position = "bottom",
-        axis.text = element_text(size = 6), aspect.ratio = 1 )
+<!-- ```{r echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- load("preformance_timesWTplyr.Rdata") -->
+<!-- global_labeller <- labeller( -->
+<!--  g = class, -->
+<!--  ntrees = trees, -->
+<!--  .default = label_both -->
+<!-- ) -->
+<!-- mm.allbig <- bind_rows(mm.new, mm.old) %>% -->
+<!--   rename(p=ps, g=gs, n=ns, ntrees=mtrees) %>% -->
+<!--   mutate(version = recode(version, new="post", old="pre")) %>% -->
+<!--   mutate(seconds = time/1e9) -->
+<!-- mm.allbig$version <- factor(mm.allbig$version, levels = c("pre","post")) -->
+<!-- levels(mm.allbig$version) <- c("Only in R", "Rcpp & parallelization") -->
+<!-- ggplot(data = mm.allbig) + -->
+<!--     geom_smooth(aes(g, seconds, color = version, -->
+<!--                         linetype = version), method="lm") + -->
+<!--     geom_jitter(aes(g, seconds, color = version, shape = version), -->
+<!--                alpha = .4, size = 3, height = 0) + -->
+<!--     scale_x_continuous(breaks=seq(0,10,2)) + -->
+<!--     labs(x = "Num. groups", y = "Time (sec)") + -->
+<!--     scale_colour_brewer(name = "", type = "qual", -->
+<!--                       palette = "Dark2") + -->
+<!--     scale_shape(name = "") + -->
+<!--     scale_linetype(name = "") + -->
+<!--     facet_grid(ntrees~n + p, labeller = label_both, -->
+<!--                 scales = "free_y") + -->
+<!--     #scale_x_continuous(trans = 'log2') + -->
+<!--     theme(legend.position = "bottom", -->
+<!--         axis.text = element_text(size = 6), aspect.ratio = 1 ) -->
 
-```
+<!-- ```  -->
 
 ## <span style="color:#26734d"> PPforest Diagnostics </span> 
 
