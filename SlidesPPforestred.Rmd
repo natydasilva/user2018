@@ -20,7 +20,6 @@ bibliography: bibliophd.bib
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-
 ## <span style="color:#26734d">Estructura de la presentación</span> 
 - Motivation
 
@@ -31,6 +30,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - Final comments
 
 
+
 ## <span style="color:#26734d">Motivation</span> 
 
 - Supervise learning: objective is to predict a categorical variable then it is a classification problem (two class or multiclass problem)
@@ -38,6 +38,11 @@ knitr::opts_chunk$set(echo = FALSE)
 - **PPforest** is a new supervised method based on bagged projection pursuit trees for classification problems.
 
 - This method improves the predictive performance when the separation between classes is in combinations of variables.
+
+## <span style="color:#26734d">Motivation</span> 
+
+**Black box model**, having better tools to open up black box models will provide for better understanding the data, the model strengths and weaknesses, and how the model will performs on future data.
+
 
 ## <span style="color:#26734d"> Ensemble models</span> 
 - Ensembles learning methods: combined multiple individual models trained independently to build a prediction model.
@@ -140,13 +145,15 @@ grid.arrange(pl.rpart,pl.pp,ncol=2)
 ## <span style="color:#26734d"> Implementation </span> 
 
 * `PPforest` is on CRAN
+
 * Initial version was develop entirely in R, not fast enought
+
 * Two code optimization strategies were employed:
      * translate the main functions to Rcpp
      * parallelization
 
 <!-- ## <span style="color:#26734d"> PPforest runing time </span>  -->
-<!-- <!-- <img src="figure/resus-1.pdf" vspace="1"  "width="700px"/> --> -->
+<!-- <!-- <img src="figure/resus-1.pdf" vspace="1"  "width="700px"/> -->
 
 <!-- ```{r echo=FALSE, warning=FALSE, message=FALSE} -->
 <!-- load("preformance_timesWTplyr.Rdata") -->
