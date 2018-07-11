@@ -20,7 +20,7 @@ bibliography: bibliophd.bib
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## <span style="color:#26734d">Estructura de la presentación</span> 
+## <span style="color:#26734d">Structure</span> 
 - Motivation
 
 - PPforest, Projection pursuit random forest
@@ -30,18 +30,17 @@ knitr::opts_chunk$set(echo = FALSE)
 - Final comments
 
 
-
 ## <span style="color:#26734d">Motivation</span> 
 
-- Supervise learning: objective is to predict a categorical variable then it is a classification problem (two class or multiclass problem)
+<!-- - Supervise learning: objective is to predict a categorical variable then it is a classification problem (two class or multiclass problem) -->
 
 - **PPforest** is a new supervised method based on bagged projection pursuit trees for classification problems.
 
-- This method improves the predictive performance when the separation between classes is in combinations of variables.
+- This method improves the predictive performance of RF when the separation between classes is in combinations of variables.
 
 ## <span style="color:#26734d">Motivation</span> 
 
-**Black box model**, having better tools to open up black box models will provide for better understanding the data, the model strengths and weaknesses, and how the model will performs on future data.
+**Black box model** having better tools to open up black box models will provide for better understanding the data, the model strengths and weaknesses, and how the model will performs on future data.
 
 
 ## <span style="color:#26734d"> Ensemble models</span> 
@@ -214,7 +213,7 @@ Structuring data and constructing plots to explore forest classification models 
  
 Key part of the visualization is the use of interactive visualization methods. 
 
-Interactive web-based visualization of the ensemble methods.
+Interactive web-based visualization of ensemble methods.
 
 
 ## <span style="color:#26734d">Interactive graphics</span>
@@ -633,7 +632,7 @@ t3 <- ternaryshell(ppf, 6, 2, 3)
 <!-- 4. The app is implemented with new technology for interactive graphics provided by the `plotly` package. It is one of the first uses of these new tools. -->
 
 
-<!-- ## <span style="color:#26734d">Some PPforest extensions </span> -->
+<!-- ## <span style="color:#26734d">Extensions </span> -->
 
 <!-- 1. Some enhancements of the PPtree algorithm to get a better separation of classes more broadly -->
 <!-- 2. Allowing a tree with multiple splits per class can help to tackle nonlinear classification problems. -->
@@ -648,11 +647,12 @@ t3 <- ternaryshell(ppf, 6, 2, 3)
 
 ## <span style="color:#26734d"> Information </span>
 
-1. PPforest package:https://cran.r-project.org/web/packages/PPforest/index.html
+1.  Working paper: https://arxiv.org/pdf/1704.02502.pdf
 2.  Slides:https://github.com/natydasilva/user2018
 3.  Viz: https://natydasilva.shinyapps.io/shinyppforest/
-4.  webpage: http://natydasilva.com
-5.  email: natalia\@iesta.edu.uy  twitter:\@pacocuak
+4.  PPforest package:https://cran.r-project.org/web/packages/PPforest/index.html
+5.  webpage: http://natydasilva.com
+6.  email: natalia\@iesta.edu.uy  twitter:\@pacocuak
 
 
-## Bibliografía
+## References 
