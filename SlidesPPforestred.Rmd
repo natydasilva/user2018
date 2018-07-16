@@ -30,8 +30,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## <span style="color:#26734d">Motivation</span> 
 
-<!-- - Supervise learning: objective is to predict a categorical variable then it is a classification problem (two class or multiclass problem) -->
-
 - **PPforest** is a new supervised method based on bagged projection pursuit trees for classification problems.
 
 - This method improves the predictive performance of RF when the separation between classes is in combinations of variables.
@@ -149,41 +147,6 @@ grid.arrange(pl.rpart,pl.pp,ncol=2)
      * translate the main functions to Rcpp
      * parallelization
 
-<!-- ## <span style="color:#26734d"> PPforest runing time </span>  -->
-<!-- <!-- <img src="figure/resus-1.pdf" vspace="1"  "width="700px"/> -->
-
-<!-- ```{r echo=FALSE, warning=FALSE, message=FALSE} -->
-<!-- load("preformance_timesWTplyr.Rdata") -->
-<!-- global_labeller <- labeller( -->
-<!--  g = class, -->
-<!--  ntrees = trees, -->
-<!--  .default = label_both -->
-<!-- ) -->
-<!-- mm.allbig <- bind_rows(mm.new, mm.old) %>% -->
-<!--   rename(p=ps, g=gs, n=ns, ntrees=mtrees) %>% -->
-<!--   mutate(version = recode(version, new="post", old="pre")) %>% -->
-<!--   mutate(seconds = time/1e9) -->
-<!-- mm.allbig$version <- factor(mm.allbig$version, levels = c("pre","post")) -->
-<!-- levels(mm.allbig$version) <- c("Only in R", "Rcpp & parallelization") -->
-<!-- ggplot(data = mm.allbig) + -->
-<!--     geom_smooth(aes(g, seconds, color = version, -->
-<!--                         linetype = version), method="lm") + -->
-<!--     geom_jitter(aes(g, seconds, color = version, shape = version), -->
-<!--                alpha = .4, size = 3, height = 0) + -->
-<!--     scale_x_continuous(breaks=seq(0,10,2)) + -->
-<!--     labs(x = "Num. groups", y = "Time (sec)") + -->
-<!--     scale_colour_brewer(name = "", type = "qual", -->
-<!--                       palette = "Dark2") + -->
-<!--     scale_shape(name = "") + -->
-<!--     scale_linetype(name = "") + -->
-<!--     facet_grid(ntrees~n + p, labeller = label_both, -->
-<!--                 scales = "free_y") + -->
-<!--     #scale_x_continuous(trans = 'log2') + -->
-<!--     theme(legend.position = "bottom", -->
-<!--         axis.text = element_text(size = 6), aspect.ratio = 1 ) -->
-
-<!-- ```  -->
-
 ## <span style="color:#26734d"> PPforest Diagnostics </span> 
 
 * OOB Error rate
@@ -223,7 +186,7 @@ Interactive web-based visualization of ensemble methods.
 Why we should use interactive visualizations?
 
 To see connections inside each level that cannot be seen in a static graphs.
- <!--  -->
+
  
 ## <span style="color:#26734d">Interactive graphics</span>
 
@@ -521,102 +484,6 @@ t3 <- ternaryshell(ppf, 6, 2, 3)
 <iframe class="vimeo-embed" src="https://player.vimeo.com/video/222029620" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen> </iframe>
 
 
-<!-- ##<span style="color:#26734d">PPforest performance and comparison</span>  -->
-
-<!-- * Simulation study to understand the PPF performance relative to RF -->
-<!-- * Two parameters are varied, $\sigma$ and $\theta$  -->
-
-<!-- <img src="figure/simulation.pdf" width="300px"/> -->
-
-<!-- ##<span style="color:#26734d">PPforest performance and comparison</span>  -->
-<!-- <img src="figure/simulation-1.pdf" width="700px"/> -->
-
-
-<!-- ##<span style="color:#26734d">PPforest performance and comparison</span>  -->
-<!-- - Randomly chosen 2/3 observations in training and  1/3 in test to compute predictive error -->
-<!-- - Repeat 200 times -->
-<!-- ```{r parbench, depenson="benchpl",echo=FALSE, message=FALSE, warning=FALSE, fig.height=6, fig.width=11} -->
-<!-- load("table.raw.Rdata") -->
-<!-- aux <- table.raw %>% -->
-<!--   separate(method, into = c('met', 'b') ) %>% -->
-<!--   group_by(data, met) %>% mutate(mm = min(mn.te) ) %>% -->
-<!--   filter(mn.te == mm ) %>% select(data, met, mn.tr, mn.te) %>% ungroup() %>% -->
-<!--   gather(type, error, mn.tr, mn.te) %>% mutate(met = reorder(met, error) ) %>% -->
-<!--   filter(type=="mn.te") %>%unite(gg, data, type, remove = FALSE) %>% -->
-<!--   mutate(type = factor(type, labels = "Test"), error = round(error,3)) %>% -->
-<!--   #mutate(type = factor(type, labels = c("Training", "Test")), error = round(error,3)) %>%  -->
-<!--   filter(type == "Test")  -->
-<!--   p1 <- ggplot(aux) + geom_line(aes(x = met, y = error, group = gg, color = data) ) + -->
-<!--   scale_x_discrete( expand = c(0.01, 0.01) ) + -->
-<!--  # scale_colour_brewer(palette="Dark2") + -->
-<!--   labs(y ="Average error rate", x ="Method", colour ="Data")  -->
-<!--   #facet_wrap(~type, ncol=2, labeller = label_parsed)  -->
-<!--  # theme(legend.position = "bottom") -->
-<!-- ggplotly(p1, tooltip = c("met", "error","data"))  -->
-<!-- ``` -->
-<!-- \caption{Benchmark data results shown graphically. PPF performs consistently well across most of the data sets. \label{parallel}} -->
-<!-- \end{figure} -->
-
-
-<!-- ##<span style="color:#26734d">PPforest performance and comparison</span>  -->
-
-<!-- ```{r echo=FALSE, message=FALSE, cache=TRUE, eval=FALSE} -->
-<!-- library(ggplot2) -->
-<!-- library(purrr) -->
-<!-- library(dplyr) -->
-<!-- library(tidyr) -->
-<!-- library(knitr) -->
-<!-- library(kableExtra) -->
-
-<!-- # load data -->
-<!-- ll <- paste('benchmark', list.files('benchmark', pattern = '.ata'), sep='/') -->
-<!-- for( i in 1:length(ll) ) load(ll[i]) -->
-
-<!-- # put all data as part of a list -->
-<!-- dtnm <- data_frame(nm = list.files('benchmark', pattern = '.ata')) %>% -->
-<!--   separate(nm, into=c('nm2', 'mugre'), sep='\\.') -->
-
-<!-- dts <- list() -->
-<!-- for (i in 1:length(ll) ) dts[[i]] <- get(dtnm$nm2[i]) -->
-<!-- names(dts) <- dtnm$nm2 -->
-
-<!-- ff <- function(x) {  -->
-<!--   mm <- c('cart', 'ppf', 'pptr', 'rf') -->
-<!--   xi <- list() -->
-<!--   for ( i in 1:4) xi[[i]]<- x %>% slice( grep(mm[i], x$method) ) %>% slice(which.min(mn.te)) -->
-
-<!--   bind_rows(xi) %>% mutate(met = mm) %>% -->
-<!--     select(met, mn.tr, mn.te) %>%  -->
-<!--     gather( type, err, mn.tr, mn.te) %>%  -->
-<!--     unite(mm, type, met, sep='_') %>% -->
-<!--     spread(mm, err) -->
-<!--   } -->
-
-<!-- dt2 <- bind_rows(lapply(dts, ff), .id='data') %>%  -->
-<!--   separate(data, into=c('Data','mugre' )) %>% select(-mugre) -->
-<!-- dt2 <- dt2[, c(1, 6:9, 2:5)]  -->
-<!-- colnames(dt2) <- c('Data', 'CART', 'PPforest', 'PPtree', 'RForest', 'CART', 'PPforest', 'PPtree', 'RForest' ) -->
-
-<!-- # using xtable for latex output -->
-<!-- # library(xtable) -->
-<!-- #mcol =  list(pos=list(-1), command="& \\multicolumn{4}{c}{TRAINING} & \\multicolumn{4}{c}{TEST} \\\\") -->
-<!-- #xtable(dt, digits=3, align=c('l', 'l||', 'r', 'r', 'r', 'r||' , 'r', 'r', 'r', 'r') ) %>% print(add.to.row=mcol, include.rownames=FALSE) -->
-
-<!-- # for r-markdown html output -->
-<!-- kable(dt2, digits = 2, format='html') %>% -->
-<!--   kable_styling(c("striped", "bordered")) %>% -->
-<!--   add_header_above(c(" " , "TRAINING" = 4, "TEST" = 4)) -->
-<!-- ``` -->
-
-
-
-<!-- ## <span style="color:#26734d">Final comments </span> -->
-<!-- 1. PPF método de clasificación agregado basado en árboles con particiones oblicuas. -->
-
-<!-- 2. PPF toma la correlación entre variables en cuenta y mejora la performance de RF cuando la separación ocurre en combinaciones de variables. -->
-
-<!-- 3. En estudios de simulación PPF tiene mejor performance que RF cuando las clases pueden ser separadas por combinaciones lineales y la correlación entre variables se incrementa. -->
-
 ## <span style="color:#26734d">Final comments</span>
 
 1. Having better tools to open up black box models will provide for better understanding the data, the model strengths and weaknesses, and how the model will performs on future data.
@@ -627,20 +494,17 @@ t3 <- ternaryshell(ppf, 6, 2, 3)
 
 4. Combining `shiny`, `ggplot2` and `plotly` we can develop informative interactive visualizations
 
-<!-- 4. The app is implemented with new technology for interactive graphics provided by the `plotly` package. It is one of the first uses of these new tools. -->
 
 
-<!-- ## <span style="color:#26734d">Extensions </span> -->
+## <span style="color:#26734d">Extensions </span> 
 
-<!-- 1. Some enhancements of the PPtree algorithm to get a better separation of classes more broadly -->
-<!-- 2. Allowing a tree with multiple splits per class can help to tackle nonlinear classification problems. -->
+ Viz app extensions that could help it to be a tool for model refinement:
+ 
+- Using the diagnostics to weed out under-performing models in the ensemble
 
-<!-- 3. Viz app extensions that could help it to be a tool for model refinement: -->
-<!--     <!-- * Using the diagnostics to weed out under-performing models in the ensemble --> 
-<!--     <!-- * Identifying and boosting models that perform well, particularly if they do well for problematic subsets of the data --> 
-<!--     * Problematic cases could be removed, and ensembles re-fit -->
-<!--     * This tool can be extended to other ensembles, and perhaps a new R package that provides general tools to explore other ensembles will be an useful tool -->
-<!--     <!-- * Classes as a whole could be aggregated or re-organised as suggested by the model diagnostics -->
+- Problematic cases could be removed, and ensembles re-fit
+- This tool can be extended to other ensembles, and perhaps a new R package that provides general tools to explore other ensembles will be an useful tool
+- Classes as a whole could be aggregated or re-organised as suggested by the model diagnostics
 
 
 ## <span style="color:#26734d"> Information </span>
