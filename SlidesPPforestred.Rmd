@@ -1,12 +1,10 @@
 ---
 title: <span style="color:#26734d">Interactive Graphics for Visually Diagnosing Forest Classifiers in R  </span>
 author: <span style="color:#000000"> <font size="6">Natalia da Silva, Universidad de la República</span></font>
-date: <span style="color:#000000"> 12 July, 2018
+# date: <span style="color:#000000"> 12 July, 2018
 output: ioslides_presentation
 bibliography: bibliophd.bib
 ---
-
-
 
  <style>
  .title-slide {
