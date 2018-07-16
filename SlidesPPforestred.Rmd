@@ -500,8 +500,7 @@ t3 <- ternaryshell(ppf, 6, 2, 3)
 
  Viz app extensions that could help it to be a tool for model refinement:
  
-- Using the diagnostics to weed out under-performing models in the ensemble
-
+- Using the diagnostics to weed out under-performing models in the ensembles
 - Problematic cases could be removed, and ensembles re-fit
 - This tool can be extended to other ensembles, and perhaps a new R package that provides general tools to explore other ensembles will be an useful tool
 - Classes as a whole could be aggregated or re-organised as suggested by the model diagnostics
